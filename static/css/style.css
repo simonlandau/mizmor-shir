@@ -1,0 +1,213 @@
+body{
+    background-color: #fbfbfa;
+    font-family: 'Roboto', sans-serif;
+    margin:0;
+    padding:0;
+}
+
+header{
+    margin: auto;
+    width:800px;
+    padding-top:10px;
+    padding-left:20px;
+    padding-right:20px;
+}
+
+header .logo{
+    display:block;
+    margin-left:auto;
+    margin-right:auto;
+}
+
+header h1 {
+    text-align: center;
+    margin-top:0;
+    font-weight: normal;
+}
+
+header p {
+    font-family: 'EB Garamond', serif;
+    font-size:18px;
+    color:#8d8d8d;
+    margin-bottom:0;
+}
+
+header button {
+    font-family: 'Roboto', sans-serif;
+    margin-top:5px;
+    width: 90px;
+    font-size: 13px;
+    height: 20px;
+    border-style: solid;
+    border-width: 1px;
+    border-radius: 3px;
+    border-color: #8d8d8d;
+    background-color: #CDCFD1;
+    color:#000;
+    box-shadow: 0 2px 1px -1px #CDCFD1;
+}
+
+section {
+    margin: auto;
+    Padding-top:30px;
+    padding-left:20px;
+    padding-right:20px;
+    padding-bottom:30px;
+    width:600px;
+}
+
+section form {
+    margin: auto;
+    width:400px;
+    display: flex;
+    flex-direction: column;
+}
+
+section form button {
+    margin:auto;
+    font-size: 16px;
+    height: 30px;
+    width:323px;
+    border-style: solid;
+    border-width: 1px;
+    border-radius: 3px;
+    /*border-color: #8d8d8d;
+    background-color: #f0f1f2;*/
+    border-color:#212e50;
+    background-color:#212e50;
+    color:#fff;
+    box-shadow: 0 2px 1px -1px #CDCFD1;
+    font-family: 'Roboto', sans-serif;
+
+}
+
+section form button:hover {
+    cursor: pointer;
+}
+
+section form .box {
+    width:300px;
+    margin: auto;
+    margin-bottom:20px;
+    display: flex;
+    flex-direction: column;
+    border-style: solid;
+    border-width: 1px;
+    border-radius: 3px;
+    border-color: #8d8d8d;
+    padding:10px;
+    box-shadow: 0 2px 1px -1px #CDCFD1;
+    background-color:#fff;
+
+}
+
+section form .box label {
+    width:140px;
+    margin-top:10px;
+    margin-bottom:5px;
+    font-size: 16px;
+}
+
+section form .box select {
+    width: 140px;
+    font-size: 16px;
+    height: 22px;
+    border-style: solid;
+    border-width: 1px;
+    border-radius: 3px;
+    border-color: #8d8d8d;
+    box-shadow: 0 2px 1px -1px #CDCFD1;
+
+}
+
+section form .box input {
+    width: 136px;
+    height: 18px;
+    font-size: 16px;
+    border-style: solid;
+    border-width: 1px;
+    border-radius: 3px;
+    border-color: #8d8d8d;
+    padding:0;
+    box-shadow: 0 2px 1px -1px #CDCFD1;
+
+}
+
+section form .box .subbox {
+    display: flex;
+    flex-direction:row;
+    justify-content:space-between;
+}
+
+.buttonbox {
+    margin: auto;
+    margin-bottom:20px;
+    width:323px;
+    display: flex;
+    flex-direction: row;
+    Justify-content: space-between;
+}
+
+.buttonbox button{
+    width: 155px;
+    height: 30px;
+    font-size: 16px;
+    border-style: solid;
+    border-width: 1px;
+    border-radius: 3px;
+    border-color: #8d8d8d;
+    box-shadow: 0 2px 1px -1px #CDCFD1;
+    background-color:#fff;
+    font-family: 'Roboto', sans-serif;
+    display:hidden; /* changed in the AJAX */
+}
+
+.buttonbox #play:hover{
+    cursor: pointer;
+    border-color:#22b573;
+    background-color:#f0f1f2;
+}
+
+.buttonbox #stop:hover{
+    cursor: pointer;
+    border-color:#e64949;
+    background-color:#f0f1f2;
+}
+
+footer p {
+    font-size:12px;
+    text-align: center;
+}
+
+footer a {
+    text-decoration:none;
+}
+
+section .opentext {
+    display:flex;
+    justify-content:center;
+    align-items:center;
+    margin:auto;
+    margin-bottom: 20px;
+    font-size: 16px;
+    height: 30px;
+    width:323px;
+    border-style: solid;
+    border-width: 1px;
+    border-radius: 3px;
+    /*border-color: #8d8d8d;
+    background-color: #f0f1f2;*/
+    border-color:#212e50;
+    background-color:#212e50;
+    color:#fff;
+    box-shadow: 0 2px 1px -1px #CDCFD1;
+    font-family: 'Roboto', sans-serif;
+}
+
+.opentext:hover{
+    cursor: pointer;
+}
+
+#more {
+    display: none;
+}
