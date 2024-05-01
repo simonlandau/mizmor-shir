@@ -1,18 +1,8 @@
-from flask import Flask, render_template, request, session
-#from csv import DictReader
+from flask import Flask, render_template, request, session, send_file
 from midiutil import MIDIFile
 import os
-import random
 import pickle
-import string
-import boto3
-from botocore.client import Config
-
-def get_random_string(length):
-    letters = string.ascii_lowercase
-    result_str = ''.join(random.choice(letters) for i in range(length))
-    print("Random string of length", length, "is:", result_str)
-    return result_str
+from io import BytesIO
 
 def makeMusic(root_note, musical_scale, num_bpm, sel_torah, sel_chap, sel_inst):
 
@@ -24,7 +14,6 @@ def makeMusic(root_note, musical_scale, num_bpm, sel_torah, sel_chap, sel_inst):
     degrees = [0,1,2,3,4,5,6,7,8,9,10,11]
     letters = ["c", "c#", "d", "d#", "e", "f", "f#", "g", "g#", "a", "a#", "b"]
     mid_num = ["60","61","62","63","64","65","66","67","68","69","70","71"]
-
 
     ext_degrees = [0,1,2,3,4,5,6,7,8,9,10,11,12,13,14,15,16,17,18,19,20,21,22,23]
     ext_letters = ["c", "c#", "d", "d#", "e", "f", "f#", "g", "g#", "a", "a#", "b","c'", "c#'", "d'", "d#'", "e'", "f'", "f#'", "g'", "g#'", "a'", "a#'", "b'"]
@@ -65,8 +54,6 @@ def makeMusic(root_note, musical_scale, num_bpm, sel_torah, sel_chap, sel_inst):
 
     for i in range(len(scale)):
         adj_scale.append((scale[i] + adj_start)) #Maybe add Mod 13 ... will keep in same octave but will jump around
-
-    print(adj_scale)
 
     comp = []
 
@@ -117,18 +104,13 @@ def makeMusic(root_note, musical_scale, num_bpm, sel_torah, sel_chap, sel_inst):
 
     arr = quantize(arr, tones)
 
-    print(arr)
-
     for i in range(len(arr)):
         comp.append(adj_scale[arr[i]])
 
-
     comp_m = []
-
 
     for i in range(len(comp)):
         comp_m.append(ext_mid_num[comp[i]])
-
 
     for i in range(len(comp_m)):
         comp_m[i] = int(comp_m[i])
@@ -166,27 +148,10 @@ def makeMusic(root_note, musical_scale, num_bpm, sel_torah, sel_chap, sel_inst):
     for i, pitch in enumerate(comp_m):
         MyMIDI.addNote(track, channel, pitch, time + i, duration, volume, program)
 
-    filename = get_random_string(8) + '.mid'
-
-    with open(filename, 'wb') as output_file:
-        MyMIDI.writeFile(output_file)
-
-    ACCESS_KEY_ID = 'REDACTED'
-    ACCESS_SECRET_KEY = 'REDACTED'
-    BUCKET_NAME = 'REDACTED'
-
-    data = open(filename, 'rb')
-
-    s3 = boto3.resource(
-        's3',
-        aws_access_key_id=ACCESS_KEY_ID,
-        aws_secret_access_key=ACCESS_SECRET_KEY,
-        config=Config(signature_version='s3v4')
-    )
-
-    s3.Bucket(BUCKET_NAME).put_object(Key=filename, Body=data)
-
-    return filename
+    midi_stream = BytesIO()
+    MyMIDI.writeFile(midi_stream)
+    midi_stream.seek(0)  # Rewind the buffer to the beginning
+    return midi_stream
 
 app = Flask(__name__)
 app.secret_key = os.urandom(24)
@@ -195,16 +160,16 @@ app.secret_key = os.urandom(24)
 def index():
     return render_template('index.html')
 
-@app.route("/generate",methods = ['GET'])
+@app.route("/generate",methods = ['POST'])
 def generate():
     
     # read in inputs from request
-    rootnote = request.args.get('root-note')
-    musicalscale = request.args.get('musical-scale')
-    numbpm = request.args.get('num-bpm')
-    seltorah = request.args.get('sel-torah')
-    numchap = request.args.get('num-chap')
-    selinst = request.args.get('sel-inst')
+    rootnote = request.form.get('root-note')
+    musicalscale = request.form.get('musical-scale')
+    numbpm = request.form.get('num-bpm')
+    seltorah = request.form.get('sel-torah')
+    numchap = request.form.get('num-chap')
+    selinst = request.form.get('sel-inst')
 
     if(numchap == ""):
         numchap=2
@@ -212,16 +177,12 @@ def generate():
     if(numbpm == ""):
         numbpm=120
 
-    session['filename'] = makeMusic(rootnote, musicalscale, numbpm, seltorah, numchap, selinst)
-    session['rootnote'] = rootnote
-    session['musicalscale'] = musicalscale
-    session['numbpm'] = numbpm
-    session['seltorah'] = seltorah
-    session['numchap'] = numchap
-    session['instrument'] = selinst
-    session['sefariaurl'] = seltorah + "." + str(numchap)
-    session['text'] = seltorah + " " + str(numchap) 
-
-    return render_template("player.html")
+    midi_content = makeMusic(rootnote, musicalscale, numbpm, seltorah, numchap, selinst)
+    return send_file(
+        midi_content,
+        mimetype="audio/midi",
+        as_attachment=True,
+        attachment_filename="output.mid"
+    )
 
 if __name__ == '__main__': app.run(debug=True)

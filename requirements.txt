@@ -3,7 +3,5 @@ Flask-RESTful
 gunicorn
 itsdangerous
 Jinja2
-peewee
 Werkzeug
 MIDIUtil
-boto3

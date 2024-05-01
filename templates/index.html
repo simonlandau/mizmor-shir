@@ -14,20 +14,59 @@
     <script type='text/javascript' src='//www.midijs.net/lib/midi.js'></script>
     <script src="{{ url_for('static', filename='js/chapterselect.js') }}"></script>
     <script src="{{ url_for('static', filename='js/showmore.js') }}"></script>
+    <script>
+        document.addEventListener("DOMContentLoaded", function() {
+            const form = document.querySelector("form");
+            let midUrl = null; // To hold the MIDI URL
+            let selTorah = null;
+            let numChap = null;
+
+            form.onsubmit = function(event) {
+                event.preventDefault();
+                const formData = new FormData(form);
+                selTorah = formData.get('sel-torah');
+                numChap = formData.get('num-chap');
+                fetch("/generate", {
+                    method: "POST",
+                    body: formData
+                }).then(response => response.blob())
+                  .then(blob => {
+                    midiUrl = URL.createObjectURL(blob);
+                    document.getElementById('player-controls').style.display = 'block';
+                    const openTextButton = document.querySelector('.opentext');
+                    openTextButton.setAttribute('onClick', `window.open('https://sefaria.org/${selTorah}.${numChap.toString()}', '_blank')`);
+                    openTextButton.textContent = `View ${selTorah} ${numChap.toString()} on Sefaria`;
+                });
+            };
+
+            // Add event listener for the start music button
+            document.getElementById('play').addEventListener('click', function() {
+                if (midiUrl) {
+                    MIDIjs.play(midiUrl);
+                }
+            });
+        });
+    </script>
 
 </head>
 <body>
     <header>
-        <a href="http://mizmor-shir.herokuapp.com"><img src="{{url_for('static', filename='img/mizmor-shir-logo.png')}}" class="logo"></a>
+        <img src="{{url_for('static', filename='img/mizmor-shir-logo.png')}}" class="logo">
         <p>We believe that Torah and music have a lot in common; they are holy languages that speak to the deepest parts of us, communicating with the heart as well as the mind. From the heavenly shofar blasts at Mt. Sinai to the musical worship described in Psalm 150, the relationship between Torah and music runs deep in Jewish spirituality and tradition. So, when faced with Sefaria’s challenge to create a new, innovative way to interact with Torah and their open source data, we asked how we could combine music, scripture, computer programming, and data analysis to create a new way of engaging with Torah. <br><br>This website is an answer to that question, translating the ancient Hebrew text into musical notes using the Kabbalistic tradition of gematria and “reading” a specific chapter as music. <span id="more"><br><br>Using Sefaria’s merged text files for each book of Torah, our website calculates the gematria value of each word in a specified chapter and then quantizes the values to fit within a musical scale, after first normalizing the values to create a more even distribution of notes within the scale’s range. This technique, called sonification, has been used to provide new insights into earthquakes, fractals, planetary motions, the periodic table, black holes, solar wind, and more by representing data as sound. Through this process we hope to showcase a different aspect of the internal structure of Torah, to reveal unseen (and unheard) patterns within it, and to contribute to the ancient tradition of Torah analysis.
         </span></p>
         <button id="showbutton" onclick="showMore()">Read more...</button>
     </header>
     <section>
-        <form action="/generate" method="GET">
+        <div id="player-controls" style="display:none;">
+            <div class="buttonbox">
+                <button id="play"><i class="fa fa-play" aria-hidden="true"></i>  Play Music</button>
+                <button id="stop" onClick="MIDIjs.stop();"><i class="fa fa-stop" aria-hidden="true"></i>  Stop Music</button>
+            </div>
+            <button class="opentext" target="_blank"></button>
+        </div>
+        <form action="/generate" method="POST">
 
             <div class="box">
-
                 <div class="subbox">
                     <label for="root-note-select">Root Note</label>
                     <label for="musical-scale-select">Musical Scale</label>
@@ -95,10 +134,8 @@
                         <option value="Numbers">Numbers</option>
                         <option value="Deuteronomy">Deuteronomy</option>
                     </select>
-                    <input type="number" name="num-chap" id="num-chap" min="1" max="50"
-placeholder="1 - 50">
+                    <input type="number" name="num-chap" id="num-chap" min="1" max="50" value="1">
                 </div>
-
             </div>
 
             <button value="submit">Generate Music</button>
