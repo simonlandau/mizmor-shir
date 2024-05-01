@@ -6,17 +6,11 @@ from io import BytesIO
 
 def makeMusic(root_note, musical_scale, num_bpm, sel_torah, sel_chap, sel_inst):
 
-    print("Entering the make music function")
+    print("Building MIDI file")
 
     i = 0
-    j = 0
 
-    degrees = [0,1,2,3,4,5,6,7,8,9,10,11]
     letters = ["c", "c#", "d", "d#", "e", "f", "f#", "g", "g#", "a", "a#", "b"]
-    mid_num = ["60","61","62","63","64","65","66","67","68","69","70","71"]
-
-    ext_degrees = [0,1,2,3,4,5,6,7,8,9,10,11,12,13,14,15,16,17,18,19,20,21,22,23]
-    ext_letters = ["c", "c#", "d", "d#", "e", "f", "f#", "g", "g#", "a", "a#", "b","c'", "c#'", "d'", "d#'", "e'", "f'", "f#'", "g'", "g#'", "a'", "a#'", "b'"]
     ext_mid_num = ["60","61","62","63","64","65","66","67","68","69","70","71","72","73","74","75","76","77","78","79","80","81","82","83"]
 
     major = [0,2,4,5,7,9,11,12]
@@ -28,8 +22,8 @@ def makeMusic(root_note, musical_scale, num_bpm, sel_torah, sel_chap, sel_inst):
     adonai_malakh = [0,1,2,3,5,7,9,10,12]
     klezmer = [0,1,4,5,7,8,10,12]
 
+    #selecting scale
     scale = []
-
     if musical_scale == "major":
         scale.extend(major)
     elif musical_scale == "harmonic_minor":
@@ -115,8 +109,7 @@ def makeMusic(root_note, musical_scale, num_bpm, sel_torah, sel_chap, sel_inst):
     for i in range(len(comp_m)):
         comp_m[i] = int(comp_m[i])
 
-    ################ Choose instrument #######################################
-
+    #selecting instrument
     instro_dict = {
     "Harp" : 46,
     "Piano" : 1,
@@ -126,14 +119,10 @@ def makeMusic(root_note, musical_scale, num_bpm, sel_torah, sel_chap, sel_inst):
     "Guitar" : 25
     }
 
-    ###################### Write Midi File ##################################
-
+    #writing MIDI file
     realbpm = int(num_bpm)
 
     track    = 0
-    track1   = 1
-    track2   = 2
-    track3   = 3
     channel  = 0
     time     = 0    # In beats
     duration = 1    # In beats
@@ -141,8 +130,8 @@ def makeMusic(root_note, musical_scale, num_bpm, sel_torah, sel_chap, sel_inst):
     volume   = 127  # 0-127, as per the MIDI standard
     program = instro_dict[sel_inst] #instrument -- look up on https://www.midi.org/specifications-old/item/gm-level-1-sound-set
 
-    MyMIDI = MIDIFile(1)  # One track, defaults to format 1 (tempo track is created
-    MyMIDI.addProgramChange(track, channel, time, program)                      # automatically)
+    MyMIDI = MIDIFile(1)  # One track, defaults to format 1 (tempo track is created automatically)
+    MyMIDI.addProgramChange(track, channel, time, program)
     MyMIDI.addTempo(track, time, tempo)
 
     for i, pitch in enumerate(comp_m):
@@ -182,7 +171,7 @@ def generate():
         midi_content,
         mimetype="audio/midi",
         as_attachment=True,
-        attachment_filename="output.mid"
+        download_name="output.mid"
     )
 
 if __name__ == '__main__': app.run(debug=True)
