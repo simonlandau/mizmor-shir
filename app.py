@@ -1,4 +1,4 @@
-from flask import Flask, render_template, request, session, send_file
+from flask import Flask, render_template, request, send_file
 from midiutil import MIDIFile
 import os
 import pickle
@@ -182,7 +182,7 @@ def generate():
         midi_content,
         mimetype="audio/midi",
         as_attachment=True,
-        attachment_filename="output.mid"
+        download_filename="output.mid"
     )
 
-if __name__ == '__main__': app.run(debug=True)
+if __name__ == '__main__': app.run()
