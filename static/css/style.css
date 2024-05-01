@@ -155,23 +155,22 @@ section form .box .subbox {
     border-style: solid;
     border-width: 1px;
     border-radius: 3px;
-    border-color: #8d8d8d;
-    box-shadow: 0 2px 1px -1px #CDCFD1;
-    background-color:#fff;
     font-family: 'Roboto', sans-serif;
+    border-color:#212e50;
+    background-color:#212e50;
+    color:#fff;
+    box-shadow: 0 2px 1px -1px #CDCFD1;
     display:hidden; /* changed in the AJAX */
 }
 
 .buttonbox #play:hover{
     cursor: pointer;
     border-color:#22b573;
-    background-color:#f0f1f2;
 }
 
 .buttonbox #stop:hover{
     cursor: pointer;
     border-color:#e64949;
-    background-color:#f0f1f2;
 }
 
 footer p {
