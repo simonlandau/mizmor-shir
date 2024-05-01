@@ -182,7 +182,7 @@ def generate():
         midi_content,
         mimetype="audio/midi",
         as_attachment=True,
-        download_filename="output.mid"
+        attachment_filename="output.mid"
     )
 
-if __name__ == '__main__': app.run()
+if __name__ == '__main__': app.run(debug=True)
