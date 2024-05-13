@@ -3,13 +3,17 @@ body {
     font-family: 'Roboto', sans-serif;
     margin: 0;
     padding: 0;
+    width: 100%;
 }
 
 header {
     margin: auto;
     width: 100%;
     max-width: 800px;
-    padding: 10px 20px;
+    padding-left: 20px;
+    padding-right: 20px;
+    padding-top: 10px;
+    padding-bottom: 10px;
 }
 
 header .logo {
@@ -127,7 +131,15 @@ section form .box .subbox {
     justify-content: space-between;
 }
 
+footer {
+    width:100%;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+}
+
 footer p {
+    width:100%;
     font-size: 12px;
     text-align: center;
 }
