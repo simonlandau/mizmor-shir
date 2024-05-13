@@ -83,6 +83,8 @@ section form button {
 
 section form button:hover {
     cursor: pointer;
+    border-color:#1c243b;
+    background-color:#1c243b;
 }
 
 section form .box {
@@ -139,40 +141,6 @@ section form .box .subbox {
     justify-content:space-between;
 }
 
-.buttonbox {
-    margin: auto;
-    margin-bottom:20px;
-    width:323px;
-    display: flex;
-    flex-direction: row;
-    Justify-content: space-between;
-}
-
-.buttonbox button{
-    width: 155px;
-    height: 30px;
-    font-size: 16px;
-    border-style: solid;
-    border-width: 1px;
-    border-radius: 3px;
-    font-family: 'Roboto', sans-serif;
-    border-color:#212e50;
-    background-color:#212e50;
-    color:#fff;
-    box-shadow: 0 2px 1px -1px #CDCFD1;
-    display:hidden; /* changed in the AJAX */
-}
-
-.buttonbox #play:hover{
-    cursor: pointer;
-    border-color:#22b573;
-}
-
-.buttonbox #stop:hover{
-    cursor: pointer;
-    border-color:#e64949;
-}
-
 footer p {
     font-size:12px;
     text-align: center;
@@ -187,15 +155,14 @@ section .opentext {
     justify-content:center;
     align-items:center;
     margin:auto;
-    margin-bottom: 20px;
+    margin-top: 20px;
+    margin-bottom: 10px;
     font-size: 16px;
     height: 30px;
     width:323px;
     border-style: solid;
     border-width: 1px;
     border-radius: 3px;
-    /*border-color: #8d8d8d;
-    background-color: #f0f1f2;*/
     border-color:#212e50;
     background-color:#212e50;
     color:#fff;
@@ -205,8 +172,11 @@ section .opentext {
 
 .opentext:hover{
     cursor: pointer;
+    border-color:#1c243b;
+    background-color:#1c243b;
 }
 
 #more {
     display: none;
 }
+

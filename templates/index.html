@@ -10,14 +10,13 @@
     <link href="https://fonts.googleapis.com/css2?family=Roboto:wght@300&display=swap" rel="stylesheet">
     <link href="https://fonts.googleapis.com/css2?family=EB+Garamond&display=swap" rel="stylesheet">
     <script src="https://use.fontawesome.com/e732d6cbfa.js"></script>
-    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
-    <script type='text/javascript' src='//www.midijs.net/lib/midi.js'></script>
+    <script src="https://cdn.jsdelivr.net/combine/npm/tone@14.7.58,npm/@magenta/music@1.23.1/es6/core.js,npm/focus-visible@5,npm/html-midi-player@1.5.0"></script>
     <script src="{{ url_for('static', filename='js/chapterselect.js') }}"></script>
     <script src="{{ url_for('static', filename='js/showmore.js') }}"></script>
     <script>
         document.addEventListener("DOMContentLoaded", function() {
             const form = document.querySelector("form");
-            let midUrl = null; // To hold the MIDI URL
+            let midiUrl = null; // To hold the MIDI URL
             let selTorah = null;
             let numChap = null;
 
@@ -33,18 +32,12 @@
                   .then(blob => {
                     midiUrl = URL.createObjectURL(blob);
                     document.getElementById('player-controls').style.display = 'block';
+                    document.querySelector('midi-player').src = midiUrl;
                     const openTextButton = document.querySelector('.opentext');
                     openTextButton.setAttribute('onClick', `window.open('https://sefaria.org/${selTorah}.${numChap.toString()}', '_blank')`);
                     openTextButton.textContent = `View ${selTorah} ${numChap.toString()} on Sefaria`;
                 });
             };
-
-            // Add event listener for the start music button
-            document.getElementById('play').addEventListener('click', function() {
-                if (midiUrl) {
-                    MIDIjs.play(midiUrl);
-                }
-            });
         });
     </script>
 
@@ -52,16 +45,14 @@
 <body>
     <header>
         <img src="{{url_for('static', filename='img/mizmor-shir-logo.png')}}" class="logo">
-        <p>We believe that Torah and music have a lot in common; they are holy languages that speak to the deepest parts of us, communicating with the heart as well as the mind. From the heavenly shofar blasts at Mt. Sinai to the musical worship described in Psalm 150, the relationship between Torah and music runs deep in Jewish spirituality and tradition. So, when faced with Sefaria’s challenge to create a new, innovative way to interact with Torah and their open source data, we asked how we could combine music, scripture, computer programming, and data analysis to create a new way of engaging with Torah. <br><br>This website is an answer to that question, translating the ancient Hebrew text into musical notes using the Kabbalistic tradition of gematria and “reading” a specific chapter as music. <span id="more"><br><br>Using Sefaria’s merged text files for each book of Torah, our website calculates the gematria value of each word in a specified chapter and then quantizes the values to fit within a musical scale, after first normalizing the values to create a more even distribution of notes within the scale’s range. This technique, called sonification, has been used to provide new insights into earthquakes, fractals, planetary motions, the periodic table, black holes, solar wind, and more by representing data as sound. Through this process we hope to showcase a different aspect of the internal structure of Torah, to reveal unseen (and unheard) patterns within it, and to contribute to the ancient tradition of Torah analysis.
+        <p>We believe that Torah and music have a lot in common; they are holy languages that speak to the deepest parts of us, communicating with the heart as well as the mind. From the heavenly shofar blasts at Mt. Sinai to the musical worship described in Psalm 150, the relationship between Torah and music runs deep in Jewish spirituality and tradition. So, when faced with Sefaria's challenge to create a new, innovative way to interact with Torah and their open source data, we asked how we could combine music, scripture, computer programming, and data analysis to create a new way of engaging with Torah. <br><br>This website is an answer to that question, translating the ancient Hebrew text into musical notes using the Kabbalistic tradition of gematria and "reading" a specific chapter as music. <span id="more"><br><br>Using Sefaria's merged text files for each book of Torah, our website calculates the gematria value of each word in a specified chapter and then quantizes the values to fit within a musical scale, after first normalizing the values to create a more even distribution of notes within the scale's range. This technique, called sonification, has been used to provide new insights into earthquakes, fractals, planetary motions, the periodic table, black holes, solar wind, and more by representing data as sound. Through this process we hope to showcase a different aspect of the internal structure of Torah, to reveal unseen (and unheard) patterns within it, and to contribute to the ancient tradition of Torah analysis.
         </span></p>
         <button id="showbutton" onclick="showMore()">Read more...</button>
     </header>
     <section>
-        <div id="player-controls" style="display:none;">
-            <div class="buttonbox">
-                <button id="play"><i class="fa fa-play" aria-hidden="true"></i>  Play Music</button>
-                <button id="stop" onClick="MIDIjs.stop();"><i class="fa fa-stop" aria-hidden="true"></i>  Stop Music</button>
-            </div>
+        <div id="player-controls" style="display:none; width:100%;">
+            <midi-player sound-font visualizer="#myVisualizer" style="width: 100%;"></midi-player>
+            <midi-visualizer type="staff" id="myVisualizer" style="width: 100%;"></midi-visualizer>
             <button class="opentext" target="_blank"></button>
         </div>
         <form action="/generate" method="POST">

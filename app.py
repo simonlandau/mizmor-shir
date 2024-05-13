@@ -53,10 +53,6 @@ def makeMusic(root_note, musical_scale, num_bpm, sel_torah, sel_chap, sel_inst):
 
     directory = os.getcwd()
 
-    with open(directory + "/MATRIX.pickle", "rb") as f:
-        MATRIX = pickle.load(f)
-
-
     # Load pickle object
     with open(directory + "/WORDS.pickle", "rb") as f:
         WORDS = pickle.load(f)
@@ -116,7 +112,7 @@ def makeMusic(root_note, musical_scale, num_bpm, sel_torah, sel_chap, sel_inst):
     "Trumpet" : 57,
     "Flute" : 74,
     "Violin" : 41,
-    "Guitar" : 25
+    "Guitar" : 25,
     }
 
     #writing MIDI file
