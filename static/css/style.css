@@ -1,161 +1,144 @@
-body{
+body {
     background-color: #fbfbfa;
     font-family: 'Roboto', sans-serif;
-    margin:0;
-    padding:0;
+    margin: 0;
+    padding: 0;
 }
 
-header{
+header {
     margin: auto;
-    width:800px;
-    padding-top:10px;
-    padding-left:20px;
-    padding-right:20px;
+    width: 100%;
+    max-width: 800px;
+    padding: 10px 20px;
 }
 
-header .logo{
-    display:block;
-    margin-left:auto;
-    margin-right:auto;
+header .logo {
+    display: block;
+    margin: 0 auto;
 }
 
 header h1 {
     text-align: center;
-    margin-top:0;
+    margin-top: 0;
     font-weight: normal;
 }
 
 header p {
     font-family: 'EB Garamond', serif;
-    font-size:18px;
-    color:#8d8d8d;
-    margin-bottom:0;
+    font-size: 18px;
+    color: #8d8d8d;
+    margin-bottom: 0;
 }
 
 header button {
     font-family: 'Roboto', sans-serif;
-    margin-top:5px;
+    margin-top: 5px;
     width: 90px;
     font-size: 13px;
     height: 20px;
-    border-style: solid;
-    border-width: 1px;
+    border: 1px solid #8d8d8d;
     border-radius: 3px;
-    border-color: #8d8d8d;
     background-color: #CDCFD1;
-    color:#000;
+    color: #000;
     box-shadow: 0 2px 1px -1px #CDCFD1;
+}
+
+header button:hover {
+    cursor: pointer;
+    border-color: #706f6f;
+    background-color: #aaabac;
 }
 
 section {
     margin: auto;
-    Padding-top:30px;
-    padding-left:20px;
-    padding-right:20px;
-    padding-bottom:30px;
-    width:600px;
+    padding: 30px 20px;
+    width: 100%;
+    max-width: 600px;
 }
 
 section form {
     margin: auto;
-    width:400px;
+    width: 100%;
+    max-width: 400px;
     display: flex;
     flex-direction: column;
 }
 
 section button {
-    display:flex;
-    justify-content:center;
-    align-items:center;
-    margin:auto;
-    margin-top: 0px;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    margin: auto;
+    margin-top: 0;
     margin-bottom: 10px;
     font-size: 16px;
     height: 30px;
-    width:323px;
-    border-style: solid;
-    border-width: 1px;
+    width: 100%;
+    max-width: 323px;
+    border: 1px solid #212e50;
     border-radius: 3px;
-    border-color:#212e50;
-    background-color:#212e50;
-    color:#fff;
+    background-color: #212e50;
+    color: #fff;
     box-shadow: 0 2px 1px -1px #CDCFD1;
     font-family: 'Roboto', sans-serif;
-
 }
 
-button:hover {
+section button:hover {
     cursor: pointer;
-    border-color:#1c243b;
-    background-color:#1c243b;
+    border-color: #1c243b;
+    background-color: #1c243b;
 }
 
 section form .box {
-    width:300px;
+    width: 100%;
+    max-width: 300px;
     margin: auto;
-    margin-bottom:20px;
+    margin-bottom: 20px;
     display: flex;
     flex-direction: column;
-    border-style: solid;
-    border-width: 1px;
+    border: 1px solid #8d8d8d;
     border-radius: 3px;
-    border-color: #8d8d8d;
-    padding:10px;
+    padding: 10px;
     box-shadow: 0 2px 1px -1px #CDCFD1;
-    background-color:#fff;
-
+    background-color: #fff;
 }
 
 section form .box label {
-    width:140px;
-    margin-top:10px;
-    margin-bottom:5px;
+    width: 100%;
+    max-width: 140px;
+    margin-top: 10px;
+    margin-bottom: 5px;
     font-size: 16px;
 }
 
-section form .box select {
-    width: 140px;
+section form .box select, section form .box input {
+    width: 100%;
+    max-width: 140px;
     font-size: 16px;
     height: 22px;
-    border-style: solid;
-    border-width: 1px;
+    border: 1px solid #8d8d8d;
     border-radius: 3px;
-    border-color: #8d8d8d;
     box-shadow: 0 2px 1px -1px #CDCFD1;
-
-}
-
-section form .box input {
-    width: 136px;
-    height: 18px;
-    font-size: 16px;
-    border-style: solid;
-    border-width: 1px;
-    border-radius: 3px;
-    border-color: #8d8d8d;
-    padding:0;
-    box-shadow: 0 2px 1px -1px #CDCFD1;
-
 }
 
 section form .box .subbox {
     display: flex;
-    flex-direction:row;
-    justify-content:space-between;
+    flex-direction: row;
+    justify-content: space-between;
 }
 
 footer p {
-    font-size:12px;
+    font-size: 12px;
     text-align: center;
 }
 
 footer a {
-    text-decoration:none;
+    text-decoration: none;
 }
 
 .opentext {
     margin-top: 10px;
-    margin-bottom:20px;
+    margin-bottom: 20px;
 }
 
 #more {

@@ -170,4 +170,4 @@ def generate():
         download_name="output.mid"
     )
 
-if __name__ == '__main__': app.run(debug=False)
+if __name__ == '__main__': app.run(debug=True)
