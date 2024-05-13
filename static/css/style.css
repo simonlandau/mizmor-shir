@@ -116,13 +116,16 @@ section form .box label {
 }
 
 section form .box select, section form .box input {
+    padding: 0;
+    margin: 0;
     width: 100%;
     max-width: 140px;
     font-size: 16px;
-    height: 22px;
+    height: 30px; /* Adjusted height to match button height */
     border: 1px solid #8d8d8d;
     border-radius: 3px;
     box-shadow: 0 2px 1px -1px #CDCFD1;
+    box-sizing: border-box;
 }
 
 section form .box .subbox {
