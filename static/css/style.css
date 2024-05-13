@@ -63,16 +63,19 @@ section form {
     flex-direction: column;
 }
 
-section form button {
+section button {
+    display:flex;
+    justify-content:center;
+    align-items:center;
     margin:auto;
+    margin-top: 0px;
+    margin-bottom: 10px;
     font-size: 16px;
     height: 30px;
     width:323px;
     border-style: solid;
     border-width: 1px;
     border-radius: 3px;
-    /*border-color: #8d8d8d;
-    background-color: #f0f1f2;*/
     border-color:#212e50;
     background-color:#212e50;
     color:#fff;
@@ -81,7 +84,7 @@ section form button {
 
 }
 
-section form button:hover {
+button:hover {
     cursor: pointer;
     border-color:#1c243b;
     background-color:#1c243b;
@@ -150,30 +153,9 @@ footer a {
     text-decoration:none;
 }
 
-section .opentext {
-    display:flex;
-    justify-content:center;
-    align-items:center;
-    margin:auto;
-    margin-top: 20px;
-    margin-bottom: 10px;
-    font-size: 16px;
-    height: 30px;
-    width:323px;
-    border-style: solid;
-    border-width: 1px;
-    border-radius: 3px;
-    border-color:#212e50;
-    background-color:#212e50;
-    color:#fff;
-    box-shadow: 0 2px 1px -1px #CDCFD1;
-    font-family: 'Roboto', sans-serif;
-}
-
-.opentext:hover{
-    cursor: pointer;
-    border-color:#1c243b;
-    background-color:#1c243b;
+.opentext {
+    margin-top: 10px;
+    margin-bottom:20px;
 }
 
 #more {

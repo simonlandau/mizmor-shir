@@ -13,33 +13,7 @@
     <script src="https://cdn.jsdelivr.net/combine/npm/tone@14.7.58,npm/@magenta/music@1.23.1/es6/core.js,npm/focus-visible@5,npm/html-midi-player@1.5.0"></script>
     <script src="{{ url_for('static', filename='js/chapterselect.js') }}"></script>
     <script src="{{ url_for('static', filename='js/showmore.js') }}"></script>
-    <script>
-        document.addEventListener("DOMContentLoaded", function() {
-            const form = document.querySelector("form");
-            let midiUrl = null; // To hold the MIDI URL
-            let selTorah = null;
-            let numChap = null;
-
-            form.onsubmit = function(event) {
-                event.preventDefault();
-                const formData = new FormData(form);
-                selTorah = formData.get('sel-torah');
-                numChap = formData.get('num-chap');
-                fetch("/generate", {
-                    method: "POST",
-                    body: formData
-                }).then(response => response.blob())
-                  .then(blob => {
-                    midiUrl = URL.createObjectURL(blob);
-                    document.getElementById('player-controls').style.display = 'block';
-                    document.querySelector('midi-player').src = midiUrl;
-                    const openTextButton = document.querySelector('.opentext');
-                    openTextButton.setAttribute('onClick', `window.open('https://sefaria.org/${selTorah}.${numChap.toString()}', '_blank')`);
-                    openTextButton.textContent = `View ${selTorah} ${numChap.toString()} on Sefaria`;
-                });
-            };
-        });
-    </script>
+    <script src="{{ url_for('static', filename='js/formHandler.js') }}"></script>
 
 </head>
 <body>
