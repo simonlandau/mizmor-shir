@@ -4,16 +4,16 @@ body {
     margin: 0;
     padding: 0;
     width: 100%;
+    display: flex;
+    flex-direction: column;
+    justify-content: flex-start;
 }
 
-header {
+header, section {
     margin: auto;
     width: 100%;
     max-width: 800px;
-    padding-left: 20px;
-    padding-right: 20px;
-    padding-top: 10px;
-    padding-bottom: 10px;
+    padding: 10px 20px;
 }
 
 header .logo {
@@ -30,34 +30,35 @@ header h1 {
 header p {
     font-family: 'EB Garamond', serif;
     font-size: 18px;
-    color: #8d8d8d;
+    color: #515151;
     margin-bottom: 0;
 }
 
-header button {
+button {
     font-family: 'Roboto', sans-serif;
+    border: 1px solid #8d8d8d;
+    border-radius: 3px;
+    box-shadow: 0 2px 1px -1px #CDCFD1;
+    cursor: pointer;
+}
+
+header button {
     margin-top: 5px;
     width: 90px;
     font-size: 13px;
     height: 20px;
-    border: 1px solid #8d8d8d;
-    border-radius: 3px;
     background-color: #CDCFD1;
     color: #000;
-    box-shadow: 0 2px 1px -1px #CDCFD1;
 }
 
 header button:hover {
-    cursor: pointer;
     border-color: #706f6f;
     background-color: #aaabac;
 }
 
 section {
-    margin: auto;
-    padding: 30px 20px;
-    width: 100%;
     max-width: 600px;
+    padding: 30px 20px;
 }
 
 section form {
@@ -80,15 +81,11 @@ section button {
     width: 100%;
     max-width: 323px;
     border: 1px solid #212e50;
-    border-radius: 3px;
     background-color: #212e50;
     color: #fff;
-    box-shadow: 0 2px 1px -1px #CDCFD1;
-    font-family: 'Roboto', sans-serif;
 }
 
 section button:hover {
-    cursor: pointer;
     border-color: #1c243b;
     background-color: #1c243b;
 }
@@ -103,7 +100,6 @@ section form .box {
     border: 1px solid #8d8d8d;
     border-radius: 3px;
     padding: 10px;
-    box-shadow: 0 2px 1px -1px #CDCFD1;
     background-color: #fff;
 }
 
@@ -118,13 +114,13 @@ section form .box label {
 section form .box select, section form .box input {
     padding: 0;
     margin: 0;
+    padding-left: 5px;
     width: 100%;
     max-width: 140px;
     font-size: 16px;
-    height: 30px; /* Adjusted height to match button height */
+    height: 30px;
     border: 1px solid #8d8d8d;
     border-radius: 3px;
-    box-shadow: 0 2px 1px -1px #CDCFD1;
     box-sizing: border-box;
 }
 
@@ -135,14 +131,15 @@ section form .box .subbox {
 }
 
 footer {
-    width:100%;
+    width: 100%;
     display: flex;
     flex-direction: column;
-    justify-content: center;
+    justify-content: flex-end;
+    margin-top: auto;
 }
 
 footer p {
-    width:100%;
+    width: 100%;
     font-size: 12px;
     text-align: center;
 }
@@ -159,4 +156,3 @@ footer a {
 #more {
     display: none;
 }
-
